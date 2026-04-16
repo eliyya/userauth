@@ -1,0 +1,36 @@
+{
+  "name": "userauth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "overrides": {
+    "eslint-plugin-import": {
+      "eslint": "10.2.0"
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@eslint/json": "1.2.0",
+    "@types/cors": "2.8.19",
+    "@types/express": "5.0.6",
+    "@types/node": "25.6.0",
+    "eslint": "10.2.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-import": "2.32.0",
+    "globals": "17.5.0",
+    "typescript": "6.0.2",
+    "typescript-eslint": "8.58.2"
+  },
+  "dependencies": {
+    "cors": "2.8.6",
+    "express": "5.2.1",
+    "jose": "6.2.2"
+  }
+}
