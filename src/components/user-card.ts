@@ -2,16 +2,16 @@ import { html } from '#/utils.ts'
 import { TimeTag } from './time-tag.ts'
 
 export interface UserCardProps {
-    user_id: string
-    name: string
-    email: string
-    session_id: string
-    session_created_at: Date
-    user_created_at: Date
-    updated_at: Date
-    expires_at: Date
-    valid: 'valid' | 'expired' | 'invalid'
-    token: string
+    user_id?: string
+    name?: string
+    email?: string
+    session_id?: string
+    session_created_at?: Date
+    user_created_at?: Date
+    updated_at?: Date
+    expires_at?: Date
+    valid?: 'valid' | 'expired' | 'invalid'
+    token?: string
 }
 export function UserCard({
     user_created_at,
@@ -23,7 +23,7 @@ export function UserCard({
     name,
     email,
     valid,
-    token
+    token,
 }: UserCardProps) {
     return html`
         <form class="card" method="get" action="/user">
@@ -39,60 +39,66 @@ export function UserCard({
                 />
             </div>
 
-            <div class="info">
-                <span class="label">ID de Usuario</span>
-                <span class="value">${user_id}</span>
-            </div>
-
-            <div class="info">
-                <span class="label">Nombre</span>
-                <span class="value">${name}</span>
-            </div>
-
-            <div class="info">
-                <span class="label">Correo</span>
-                <span class="value">${email}</span>
-            </div>
-
-            <div class="info">
-                <span class="label">Usuario Creado</span>
-                <span class="value">
-                    ${TimeTag(user_created_at, true)}
-                </span>
-            </div>
-
-            <div class="info">
-                <span class="label">Usuario Modificado</span>
-                <span class="value">
-                    ${TimeTag(updated_at, true)}
-                </span>
-            </div>
-
-            <div class="info">
-                <span class="label">ID de Sesion</span>
-                <span class="value">${session_id}</span>
-            </div>
-
-            <div class="info">
-                <span class="label">Sesion Creada</span>
-                <span class="value">
-                    ${TimeTag(session_created_at, true)}
-                </span>
-            </div>
-
-            <div class="info">
-                <span class="label">Expira</span>
-                <span class="value">
-                    ${TimeTag(expires_at, true)}
-                </span>
-            </div>
-
-            <div class="info">
-                <span class="label">Token</span>
-                <span class="badge ${valid == 'valid' ? 'ok' : 'bad'}">
-                    ${valid}
-                </span>
-            </div>
+            ${user_id ?
+                html`<div class="info">
+                    <span class="label">ID de Usuario</span>
+                    <span class="value">${user_id}</span>
+                </div>`
+            :   ''}
+            ${name ?
+                html`<div class="info">
+                    <span class="label">Nombre</span>
+                    <span class="value">${name}</span>
+                </div>`
+            :   ''}
+            ${email ?
+                html`<div class="info">
+                    <span class="label">Correo</span>
+                    <span class="value">${email}</span>
+                </div>`
+            :   ''}
+            ${user_created_at ?
+                html`<div class="info">
+                    <span class="label">Usuario Creado</span>
+                    <span class="value">
+                        ${TimeTag(user_created_at, true)}
+                    </span>
+                </div>`
+            :   ''}
+            ${updated_at ?
+                html`<div class="info">
+                    <span class="label">Usuario Modificado</span>
+                    <span class="value"> ${TimeTag(updated_at, true)} </span>
+                </div>`
+            :   ''}
+            ${session_id ?
+                html`div class="info">
+                    <span class="label">ID de Sesion</span>
+                    <span class="value">${session_id}</span>
+                </div>`
+            :   ''}
+            ${session_created_at ?
+                html`<div class="info">
+                    <span class="label">Sesion Creada</span>
+                    <span class="value">
+                        ${TimeTag(session_created_at, true)}
+                    </span>
+                </div>`
+            :   ''}
+            ${expires_at ?
+                html`<div class="info">
+                    <span class="label">Expira</span>
+                    <span class="value"> ${TimeTag(expires_at, true)} </span>
+                </div>`
+            :   ''}
+            ${typeof valid !== 'undefined' ?
+                html`<div class="info">
+                    <span class="label">Token</span>
+                    <span class="badge ${valid == 'valid' ? 'ok' : 'bad'}">
+                        ${valid}
+                    </span>
+                </div>`
+            :   ''}
 
             <button type="submit">Validar</button>
         </form>

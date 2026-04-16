@@ -2,7 +2,6 @@ import { Router } from 'express'
 import { UserCard } from '#/components/user-card.ts'
 import { Layout } from '#/components/layout.ts'
 import { decodeJwt, jwtVerify } from 'jose'
-import { ErrorCard } from '#/components/error-card.ts'
 import { SECRET } from '#/constants.ts'
 import { JWTInvalid } from 'jose/errors'
 
@@ -13,7 +12,7 @@ async function verifyToken(token: string) {
         await jwtVerify(token, SECRET)
         return 'valid'
     } catch (err) {
-        if ((err instanceof JWTInvalid) && err.code === 'ERR_JWT_EXPIRED') {
+        if (err instanceof JWTInvalid && err.code === 'ERR_JWT_EXPIRED') {
             return 'expired'
         }
 
@@ -25,16 +24,7 @@ user.get('/', async (req, res) => {
     const { token } = req.query
 
     if (typeof token !== 'string') {
-        return res.send(
-            Layout(
-                ErrorCard({
-                    title: 'Token invalido',
-                    message:
-                        'Debe incluir un token en la url como ?token=abc.def.ghi',
-                    code: 400,
-                }),
-            ),
-        )
+        return res.send(Layout(UserCard({})))
     }
 
     const {
@@ -70,7 +60,7 @@ user.get('/', async (req, res) => {
                 email,
                 name,
                 valid,
-                token
+                token,
             }),
         ),
     )

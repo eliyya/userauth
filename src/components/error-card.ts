@@ -2,7 +2,7 @@ import { html } from "#/utils.ts";
 
 export function ErrorCard({ title = 'Ocurrió un error', message = 'Algo salió mal', code = 500 }) {
     return html`
-<div class="card">
+<form class="card">
     <div class="icon">⚠️</div>
 
     <h2>${title}</h2>
@@ -14,7 +14,7 @@ export function ErrorCard({ title = 'Ocurrió un error', message = 'Algo salió 
         <a href="javascript:history.back()" class="button secondary">Volver</a>
         <a href="/" class="button">Ir al inicio</a>
     </div>
-</div>
+</form>
 
 <style>
     .card {
