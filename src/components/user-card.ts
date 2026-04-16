@@ -26,7 +26,7 @@ export function UserCard({
     token
 }: UserCardProps) {
     return html`
-        <div class="card">
+        <form class="card" method="get" action="/user">
             <h2>Perfil</h2>
 
             <div class="field">
@@ -95,7 +95,7 @@ export function UserCard({
             </div>
 
             <button type="submit">Validar</button>
-        </div>
+        </form>
 
         <style>
             .card {
