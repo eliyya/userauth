@@ -72,7 +72,7 @@ export function UserCard({
                 </div>`
             :   ''}
             ${session_id ?
-                html`div class="info">
+                html`<div class="info">
                     <span class="label">ID de Sesion</span>
                     <span class="value">${session_id}</span>
                 </div>`
