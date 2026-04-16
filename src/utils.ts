@@ -11,3 +11,12 @@ function html(strings: TemplateStringsArray, ...values: any[]) {
     return result
 }
 export { html }
+
+export function loadEnv() {
+    try {
+        process.loadEnvFile()
+    } catch {
+        console.error("No hay .env")
+        process.exit(1)
+    }
+}
