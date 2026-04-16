@@ -13,7 +13,7 @@ export interface LoginFormProps {
 }
 export function LoginForm({ errors = {}, values = {} }: LoginFormProps = {}) {
     return html`
-    <form class="card" method="post" action="/register">
+    <form class="card" method="post" action="/login">
         <h1>Iniciar sesion</h1>
 
         ${errors.form ? `<div class="error-box">${errors.form}</div>` : ''}
@@ -41,6 +41,8 @@ export function LoginForm({ errors = {}, values = {} }: LoginFormProps = {}) {
             />
             ${errors.password ? `<div class="error-text">${errors.password}</div>` : ''}
         </div>
+
+        <button type="submit">Registrarse</button>
     </form>
 `
 }

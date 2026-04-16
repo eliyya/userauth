@@ -1,87 +1,153 @@
-import { html } from "#/utils.ts"
+import { html } from '#/utils.ts'
+import { TimeTag } from './time-tag.ts'
 
 export interface UserCardProps {
-    id: string
+    user_id: string
     name: string
     email: string
-    tokenValid: boolean
+    session_id: string
+    session_created_at: Date
+    user_created_at: Date
+    updated_at: Date
+    expires_at: Date
+    valid: 'valid' | 'expired' | 'invalid'
+    token: string
 }
-export function UserCard({ id, name, email, tokenValid }: UserCardProps) {
+export function UserCard({
+    user_created_at,
+    session_created_at,
+    expires_at,
+    session_id,
+    updated_at,
+    user_id,
+    name,
+    email,
+    valid,
+    token
+}: UserCardProps) {
     return html`
-<div class="card">
-    <h2>Perfil</h2>
+        <div class="card">
+            <h2>Perfil</h2>
 
-    <div class="info">
-        <span class="label">ID</span>
-        <span class="value">${id}</span>
-    </div>
+            <div class="field">
+                <label>token</label>
+                <input
+                    name="token"
+                    type="text"
+                    value="${token ?? ''}"
+                    required
+                />
+            </div>
 
-    <div class="info">
-        <span class="label">Nombre</span>
-        <span class="value">${name}</span>
-    </div>
+            <div class="info">
+                <span class="label">ID de Usuario</span>
+                <span class="value">${user_id}</span>
+            </div>
 
-    <div class="info">
-        <span class="label">Correo</span>
-        <span class="value">${email}</span>
-    </div>
+            <div class="info">
+                <span class="label">Nombre</span>
+                <span class="value">${name}</span>
+            </div>
 
-    <div class="info">
-        <span class="label">Token</span>
-        <span class="badge ${tokenValid ? 'ok' : 'bad'}">
-            ${tokenValid ? 'Válido' : 'Alterado'}
-        </span>
-    </div>
-</div>
+            <div class="info">
+                <span class="label">Correo</span>
+                <span class="value">${email}</span>
+            </div>
 
-<style>
-    .card {
-        background: #111827;
-        border: 1px solid #1f2937;
-        border-radius: 1rem;
-        padding: 1.5rem;
-        max-width: 400px;
-        margin: 2rem auto;
-        color: #e5e7eb;
-        font-family: system-ui, -apple-system, sans-serif;
-    }
+            <div class="info">
+                <span class="label">Usuario Creado</span>
+                <span class="value">
+                    ${TimeTag(user_created_at, true)}
+                </span>
+            </div>
 
-    h2 {
-        margin-bottom: 1rem;
-        text-align: center;
-    }
+            <div class="info">
+                <span class="label">Usuario Modificado</span>
+                <span class="value">
+                    ${TimeTag(updated_at, true)}
+                </span>
+            </div>
 
-    .info {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.75rem;
-        font-size: 0.95rem;
-    }
+            <div class="info">
+                <span class="label">ID de Sesion</span>
+                <span class="value">${session_id}</span>
+            </div>
 
-    .label {
-        color: #9ca3af;
-    }
+            <div class="info">
+                <span class="label">Sesion Creada</span>
+                <span class="value">
+                    ${TimeTag(session_created_at, true)}
+                </span>
+            </div>
 
-    .value {
-        font-weight: 500;
-    }
+            <div class="info">
+                <span class="label">Expira</span>
+                <span class="value">
+                    ${TimeTag(expires_at, true)}
+                </span>
+            </div>
 
-    .badge {
-        padding: 0.25rem 0.6rem;
-        border-radius: 999px;
-        font-size: 0.75rem;
-        font-weight: 600;
-    }
+            <div class="info">
+                <span class="label">Token</span>
+                <span class="badge ${valid == 'valid' ? 'ok' : 'bad'}">
+                    ${valid}
+                </span>
+            </div>
 
-    .ok {
-        background: rgba(34,197,94,0.15);
-        color: #22c55e;
-    }
+            <button type="submit">Validar</button>
+        </div>
 
-    .bad {
-        background: rgba(239,68,68,0.15);
-        color: #ef4444;
-    }
-</style>
-`
+        <style>
+            .card {
+                background: #111827;
+                border: 1px solid #1f2937;
+                border-radius: 1rem;
+                padding: 1.5rem;
+                max-width: 400px;
+                margin: 2rem auto;
+                color: #e5e7eb;
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    sans-serif;
+            }
+
+            h2 {
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+
+            .info {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 0.75rem;
+                font-size: 0.95rem;
+            }
+
+            .label {
+                color: #9ca3af;
+            }
+
+            .value {
+                font-weight: 500;
+            }
+
+            .badge {
+                padding: 0.25rem 0.6rem;
+                border-radius: 999px;
+                font-size: 0.75rem;
+                font-weight: 600;
+            }
+
+            .ok {
+                background: rgba(34, 197, 94, 0.15);
+                color: #22c55e;
+            }
+
+            .bad {
+                background: rgba(239, 68, 68, 0.15);
+                color: #ef4444;
+            }
+        </style>
+    `
 }

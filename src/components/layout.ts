@@ -10,7 +10,7 @@ export function Layout(body = "") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Registro</title>
+    <title>Autenticacion</title>
     <style>
         :root {
             color-scheme: dark light;
