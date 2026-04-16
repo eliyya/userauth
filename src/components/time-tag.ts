@@ -25,7 +25,8 @@ function relativeTime(date: Date) {
     return rtf.format(Math.round(days), 'day')
 }
 
-export function TimeTag(date: Date, relative = false) {
+export function TimeTag(timestamp: number, relative = false) {
+    const date = new Date(timestamp)
     return `
         <time datetime="${date.toISOString()}">
             ${relative ? relativeTime(date) : formatDate(date)}

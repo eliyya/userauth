@@ -2,16 +2,16 @@ import { html } from '#/utils.ts'
 import { TimeTag } from './time-tag.ts'
 
 export interface UserCardProps {
-    user_id?: string
-    name?: string
-    email?: string
-    session_id?: string
-    session_created_at?: Date
-    user_created_at?: Date
-    updated_at?: Date
-    expires_at?: Date
-    valid?: 'valid' | 'expired' | 'invalid'
-    token?: string
+    user_id?: string | undefined
+    name?: string | undefined
+    email?: string | undefined
+    session_id?: string | undefined
+    session_created_at?: number | undefined
+    user_created_at?: number | undefined
+    updated_at?: number | undefined
+    expires_at?: number | undefined
+    valid?: 'valid' | 'expired' | 'invalid' | undefined
+    token?: string | undefined
 }
 export function UserCard({
     user_created_at,
