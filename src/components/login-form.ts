@@ -1,37 +1,22 @@
 import { html } from "#/utils.ts";
 
-export interface RegisterFormProps {
+export interface LoginFormProps {
     errors?: {
         form?: string
-        name?: string
         email?: string
         password?: string
-        confirm?: string
     }
     values?: {
-        name?: string
         email?: string
         password?: string
-        confirm?: string
     }
 }
-export function RegisterForm({ errors = {}, values = {} }: RegisterFormProps = {}) {
+export function LoginForm({ errors = {}, values = {} }: LoginFormProps = {}) {
     return html`
     <form class="card" method="post" action="/register">
-        <h1>Crear cuenta</h1>
+        <h1>Iniciar sesion</h1>
 
         ${errors.form ? `<div class="error-box">${errors.form}</div>` : ''}
-
-        <div class="field">
-            <label>Nombre</label>
-            <input
-                name="name"
-                value="${values.name ?? ''}"
-                class="${errors.name ? 'error' : ''}"
-                required
-            />
-            ${errors.name ? `<div class="error-text">${errors.name}</div>` : ''}
-        </div>
 
         <div class="field">
             <label>Correo</label>
@@ -56,20 +41,6 @@ export function RegisterForm({ errors = {}, values = {} }: RegisterFormProps = {
             />
             ${errors.password ? `<div class="error-text">${errors.password}</div>` : ''}
         </div>
-
-        <div class="field">
-            <label>Confirmar contraseña</label>
-            <input
-                name="confirm"
-                type="password"
-                value="${values.confirm ?? ''}"
-                class="${errors.confirm ? 'error' : ''}"
-                required
-            />
-            ${errors.confirm ? `<div class="error-text">${errors.confirm}</div>` : ''}
-        </div>
-
-        <button type="submit">Registrarse</button>
     </form>
 `
 }

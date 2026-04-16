@@ -1,30 +1,35 @@
 import { Router } from 'express'
-import { html } from '#/utils.ts'
-import { RegisterForm, type RegisterFormProps } from '#/components/register-form.ts'
+import {
+    RegisterForm,
+    type RegisterFormProps,
+} from '#/components/register-form.ts'
+import { Layout } from '#/components/layout.ts'
 
 const register = Router()
 
 register.get('/', (req, res) => {
-    res.send(RegisterForm())
+    res.send(Layout(RegisterForm()))
 })
 
 register.post('/', (req, res) => {
-    console.log(req.body);
-    
     const { name = '', email = '', password = '', confirm = '' } = req.body
     const errors: RegisterFormProps['errors'] = {}
-    if (password !== confirm) errors.confirm = "Las contrasenias deben ser iguales"
+    if (password !== confirm) {
+        errors.confirm = 'Las contrasenias deben ser iguales'
+    }
 
     res.send(
-        RegisterForm({
-            values: {
-                name,
-                email,
-                password,
-                confirm,
-            },
-            errors
-        }),
+        Layout(
+            RegisterForm({
+                values: {
+                    name,
+                    email,
+                    password,
+                    confirm,
+                },
+                errors,
+            }),
+        ),
     )
 })
 
